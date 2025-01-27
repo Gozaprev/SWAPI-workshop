@@ -8,8 +8,8 @@ let totalPages = 0;
 let currentEndpoint = ''; 
 
 document.addEventListener('DOMContentLoaded', () => {
-    imgPeople.addEventListener('click', () => fetchData('people', 1));
-    imgShips.addEventListener('click', () => fetchData('starships', 1));
+    imgPeople.addEventListener('click', () => fetchData('people', currentPage));
+    imgShips.addEventListener('click', () => fetchData('starships', currentPage));
 });
 
 function fetchData(endpoint, page) {
@@ -29,6 +29,7 @@ function fetchData(endpoint, page) {
 
             if (endpoint === 'people') {
                 const limitedPeople = data.results; 
+                // const limitedPeople = data.results.slice(0, 10); //Ogranicuva na 10 lugje
                 displayPeople(limitedPeople);
             } else if (endpoint === 'starships') {
                 displayShips(data.results);
