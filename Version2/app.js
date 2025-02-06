@@ -47,33 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
 //     document.getElementById('spinner').style.display = 'block';
 //     document.getElementById('error-message').style.display = 'none';
 
-    // try {
-    //     const response = await fetch(url);
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-    //     const data = await response.json();
-    //     console.log(data);
-    //     currentEndpoint = endpoint; // Update the current endpoint
-    //     totalPages = Math.ceil(data.count / 10); // Calculate total pages based on count
+// try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//         throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//     currentEndpoint = endpoint; // Update the current endpoint
+//     totalPages = Math.ceil(data.count / 10); // Calculate total pages based on count
 
-    //     if (endpoint === 'people') {
-    //         displayPeople(data.results);
-    //     } else if (endpoint === 'starships') {
-    //         displayShips(data.results);
-    //     } else if (endpoint === 'planets') {
-    //         displayPlanets(data.results); 
+//     if (endpoint === 'people') {
+//         displayPeople(data.results);
+//     } else if (endpoint === 'starships') {
+//         displayShips(data.results);
+//     } else if (endpoint === 'planets') {
+//         displayPlanets(data.results); 
 
-    //     }
+//     }
 
-    //     // endpoint === 'people' ? displayPeople(data.results) : displayShips(data.results);
-    // } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //     displayErrorMessage(`Something went wrong. The error is: ${error}`); 
-    // } finally {
-    //     // Hide the spinner after the request is complete
-    //     document.getElementById('spinner').style.display = 'none';
-    // }
+//     // endpoint === 'people' ? displayPeople(data.results) : displayShips(data.results);
+// } catch (error) {
+//     console.error('Error fetching data:', error);
+//     displayErrorMessage(`Something went wrong. The error is: ${error}`); 
+// } finally {
+//     // Hide the spinner after the request is complete
+//     document.getElementById('spinner').style.display = 'none';
+// }
 
 //     try {
 //         const response = await fetch(url);
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //         console.error('Error fetching data:', error);
 //         displayErrorMessage(`Something went wrong. The error is: ${error}`);
 //     } finally {
-        
+
 //         document.getElementById('spinner').style.display = 'none';
 //     }
 // }
@@ -124,11 +124,11 @@ const fetchDataFunc = async (endpoint, page) => {
         } else if (endpoint === 'starships') {
             displayShips(data.results);
         } else if (endpoint === 'planets') {
-            displayPlanets(data.results); 
+            displayPlanets(data.results);
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        displayErrorMessage(`Something went wrong. The error is: ${error.message}`); 
+        displayErrorMessage(`Something went wrong. The error is: ${error.message}`);
     } finally {
         // Hide the spinner after the request is complete
         document.getElementById('spinner').style.display = 'none';
@@ -333,58 +333,245 @@ function displayErrorMessage(message) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-function displayData(data, headers) {
+// function displayData(data, headers) {
+//     tableContainer.innerHTML = '';
+//     const table = document.createElement('table');
+
+//     // Create table headers
+//     const headerRow = headers.map(header => `<th>${header}</th>`).join('');
+//     table.innerHTML = `<tr>${headerRow}</tr><tbody>${data.map(item => {
+//         // Create a row for each item based on the headers
+//         return `<tr>${headers.map(header => `<td>${item[header.toLowerCase().replace(/ /g, '_')] || ''}</td>`).join('')}</tr>`;
+//     }).join('')}</tbody>`;
+
+//     tableContainer.appendChild(table);
+//     createPaginationButtons();
+// }
+
+// function displayPeople(people) {
+//     const headers = ['Name', 'Height (cm)', 'Mass (kg)', 'Gender', 'Birth Year', 'Appearances'];
+//     displayData(people.map(person => ({
+//         name: person.name,
+//         height: person.height,
+//         mass: person.mass,
+//         gender: person.gender,
+//         birth_year: person.birth_year,
+//         appearances: person.films.length
+//     })), headers);
+// }
+
+// function displayShips(ships) {
+//     const headers = ['Name', 'Model', 'Manufacturer', 'Cost (credits)', 'Crew', 'Passengers', 'Class'];
+//     displayData(ships.map(ship => ({
+//         name: ship.name,
+//         model: ship.model,
+//         manufacturer: ship.manufacturer,
+//         cost_in_credits: ship.cost_in_credits,
+//         crew: ship.crew,
+//         passengers: ship.passengers,
+//         starship_class: ship.starship_class
+//     })), headers);
+// }
+
+// function displayPlanets(planets) {
+//     const headers = ['Planet Name', 'Population', 'Climate', 'Gravity', 'Terrain'];
+//     displayData(planets.map(planet => ({
+//         name: planet.name,
+//         population: planet.population,
+//         climate: planet.climate,
+//         gravity: planet.gravity,
+//         terrain: planet.terrain
+//     })), headers);
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// function displayPeople(people) {
+//     const headers = [
+//         { key: "name", display: "Name" },
+//         { key: "height", display: "Height (cm)" },
+//         { key: "mass", display: "Mass (kg)" },
+//         { key: "gender", display: "Gender" },
+//         { key: "birth_year", display: "Birth Year" },
+//         { key: "appearances", display: "Appearances" },
+
+//     ];
+//     displayData(
+//         people.map(person => ({
+//             ...person,
+//             appearances: person.films.length,
+//         })),
+//         headers
+//     );
+
+// }
+
+
+
+// const headerRow = headers
+//     .map(header => `<th>${header.display}</th>`)
+//     .join("");
+// table.innerHTML = `<tr>${headerRow}</tr>
+// <tbody>${data
+//         .map(item => {
+//             return `<tr>${headers
+//                 .map(header => `<td>${item[header.key] || ""}</td>`)
+//                 .join("")}</tr>`;
+//         })
+//         .join("")}</tbody>`;
+
+// const formattedPeople = people.map(person => ({
+//     ...person,
+//     appearances: person.films.length, 
+// }));
+
+// displayData(formattedPeople, headers);
+// }
+
+
+// function displayData(data, headers) {
+//     tableContainer.innerHTML = '';
+//     const table = document.createElement('table');
+
+//     // Create table headers
+//     const headerRow = headers
+//         .map(header => `<th>${header.display}</th>`)
+//         .join('');
+//     table.innerHTML = `<tr>${headerRow}</tr>
+//         <tbody>${data
+//             .map(item => {
+//                 return `<tr>${headers
+//                     .map(header => `<td>${item[header.key] || ''}</td>`)
+//                     .join('')}</tr>`;
+//             })
+//             .join('')}</tbody>`;
+
+//     tableContainer.appendChild(table);
+//     createPaginationButtons();
+// }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+function displayPeople(people) {
+    const headers = [
+        { key: "name", display: "Name" },
+        { key: "height", display: "Height (cm)" },
+        { key: "mass", display: "Mass (kg)" },
+        { key: "gender", display: "Gender" },
+        { key: "birth_year", display: "Birth Year" },
+        { key: "appearances", display: "Appearances" },
+    ];
+
+
+    const formattedPeople = people.map(person => ({
+        ...person,
+        appearances: person.films.length,
+    }));
+
+
     tableContainer.innerHTML = '';
     const table = document.createElement('table');
-    
-    // Create table headers
-    const headerRow = headers.map(header => `<th>${header}</th>`).join('');
-    table.innerHTML = `<tr>${headerRow}</tr><tbody>${data.map(item => {
-        // Create a row for each item based on the headers
-        return `<tr>${headers.map(header => `<td>${item[header.toLowerCase().replace(/ /g, '_')] || ''}</td>`).join('')}</tr>`;
-    }).join('')}</tbody>`;
-    
+
+
+    const headerRow = headers
+        .map(header => `<th>${header.display}</th>`)
+        .join('');
+    table.innerHTML = `<tr>${headerRow}</tr>
+    <tbody>${formattedPeople
+            .map(item => {
+                return `<tr>${headers
+                    .map(header => `<td>${item[header.key] || ''}</td>`)
+                    .join('')}</tr>`;
+            })
+            .join('')}</tbody>`;
+
+
     tableContainer.appendChild(table);
     createPaginationButtons();
 }
 
-function displayPeople(people) {
-    const headers = ['Name', 'Height (cm)', 'Mass (kg)', 'Gender', 'Birth Year', 'Appearances'];
-    displayData(people.map(person => ({
-        name: person.name,
-        height: person.height,
-        mass: person.mass,
-        gender: person.gender,
-        birth_year: person.birth_year,
-        appearances: person.films.length
-    })), headers);
-}
+/////////////////----------------------------------------------------------------------
 
 function displayShips(ships) {
-    const headers = ['Name', 'Model', 'Manufacturer', 'Cost (credits)', 'Crew', 'Passengers', 'Class'];
-    displayData(ships.map(ship => ({
-        name: ship.name,
-        model: ship.model,
-        manufacturer: ship.manufacturer,
-        cost_in_credits: ship.cost_in_credits,
-        crew: ship.crew,
-        passengers: ship.passengers,
-        starship_class: ship.starship_class
-    })), headers);
+    const headers = [
+        { key: "name", display: "Name" },
+        { key: "model", display: "Model" },
+        { key: "manufacturer", display: "Manufacturer" },
+        { key: "cost_in_credits", display: "Cost (credits)" },
+        { key: "crew", display: "Crew" },
+        { key: "passengers", display: "Passengers" },
+        { key: "starship_class", display: "Class" },
+    ];
+
+
+    const formattedShips = ships.map(ship => ({
+        ...ship,
+    }));
+
+
+    tableContainer.innerHTML = '';
+    const table = document.createElement('table');
+
+
+    const headerRow = headers
+        .map(header => `<th>${header.display}</th>`)
+        .join('');
+    table.innerHTML = `<tr>${headerRow}</tr>
+    <tbody>${formattedShips
+            .map(item => {
+                return `<tr>${headers
+                    .map(header => `<td>${item[header.key] || ''}</td>`)
+                    .join('')}</tr>`;
+            })
+            .join('')}</tbody>`;
+
+
+    tableContainer.appendChild(table);
+    createPaginationButtons();
 }
+
+/////////////////----------------------------------------------------------------------
 
 function displayPlanets(planets) {
-    const headers = ['Planet Name', 'Population', 'Climate', 'Gravity', 'Terrain'];
-    displayData(planets.map(planet => ({
-        name: planet.name,
-        population: planet.population,
-        climate: planet.climate,
-        gravity: planet.gravity,
-        terrain: planet.terrain
-    })), headers);
+    const headers = [
+        { key: "name", display: "Planet Name" },
+        { key: "population", display: "Population" },
+        { key: "climate", display: "Climate" },
+        { key: "gravity", display: "Gravity" },
+        { key: "terrain", display: "Terrain" },
+        
+    ];
+
+
+    const formattedPlanets = planets.map(planet => ({
+        ...planet,
+    }));
+
+
+    tableContainer.innerHTML = '';
+    const table = document.createElement('table');
+
+
+    const headerRow = headers
+        .map(header => `<th>${header.display}</th>`)
+        .join('');
+    table.innerHTML = `<tr>${headerRow}</tr>
+    <tbody>${formattedPlanets
+            .map(item => {
+                return `<tr>${headers
+                    .map(header => `<td>${item[header.key] || ''}</td>`)
+                    .join('')}</tr>`;
+            })
+            .join('')}</tbody>`;
+
+
+    tableContainer.appendChild(table);
+    createPaginationButtons();
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 function createPaginationButtons() {
     while (existingButtons.length > 0) {

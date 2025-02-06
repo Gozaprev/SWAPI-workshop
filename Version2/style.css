@@ -141,5 +141,6 @@ td {
 .error {
     display: none; 
     color: red;
+    margin-top: 20px;
 
 }  
